@@ -7,5 +7,11 @@ module.exports = async (msg, args) => {
 	test = moment()
 		.tz(`Europe/${args}`)
 		.format('HH:mm');
-	await msg.channel.send(`${msg.author} ${test}`);
+	if (!moment.tz.zone()) {
+		await msg.channel.send(
+			`${msg.author} This aint it sis (Not crrently supported) `
+		);
+	} else {
+		await msg.channel.send(`${msg.author} ${test}`);
+	}
 };
