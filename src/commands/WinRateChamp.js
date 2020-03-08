@@ -63,14 +63,14 @@ module.exports = async (msg, args) => {
 				name: '**Winrate**',
 				value: `**${stringedWinRate.replace(/[\n\s\t"\\%n\][]/g, '')} %**`
 			},
-				{
-					name: '**BanRate**🤔',
-					value: `${stringedBanRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} % `
-				},
-				{
-					name: '**Avarage Deaths per game**',
-					value: `${stringedDeathRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} % `
-				}
+			{
+				name: '**BanRate**🤔',
+				value: `${stringedBanRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} % `
+			},
+			{
+				name: '**Avarage Deaths per game**',
+				value: `${stringedDeathRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} % `
+			}
 			],
 			timestamp: new Date(),
 			footer: {
