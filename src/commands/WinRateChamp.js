@@ -1,62 +1,76 @@
 const rp = require('request-promise');
-var url = '';
 const $ = require('cheerio');
+let url = '';
 
-let championRate = [];
-let banRate = [];
-let placement = [];
+let championRate = [],
+	banRate = [],
+	deathRate = [];
+
+let stringedWinRate = null,
+	stringedBanRate = null,
+	stringedDeathRate = null;
 
 async function get_data_id() {
 	return rp(url)
 		.then(function(html) {
 			championRate = [];
 			banRate = [];
-			placement = [];
-			for (let i = 0; i < 1; i++) {
-				championRate.push(
-					$('#statistics-win-rate-row > td:nth-child(2)', html)
-						.map((i, ele) => $(ele).text())
-						.get()[i],
-				);
-				banRate.push(
-					$('#statistics-ban-rate-row-row> td:nth-child(2)', html)
-						.map((i, ele) => $(ele).text())
-						.get()[i]
-				);
-				placement.push(
-					$('td:nth-child(2) > strong ', html)
-						.map((i, ele) => $(ele).text())
-						.get()[i]
-				);
+			deathRate = [];
 
-			}
+			championRate.push(
+				$('#statistics-win-rate-row > td:nth-child(2)', html)
+					.map((i, ele) => $(ele).text())
+					.get()
+			);
+			banRate.push(
+				$('#statistics-ban-rate-row-row> td:nth-child(2)', html)
+					.map((i, ele) => $(ele).text())
+					.get()
+			);
+			deathRate.push(
+				$('#statistics-deaths-row > td:nth-child(2) ', html)
+					.map((i, ele) => $(ele).text())
+					.get()
+			);
 
-			return [championRate, banRate, placement];
+			return [championRate, banRate, deathRate];
 		})
 		.catch(function(err) {
 			console.log(err);
 		});
 }
 
+async function stringifyChampions() {
+	championRate = await get_data_id();
+	banRate = await get_data_id();
+	deathRate[2] = await get_data_id();
+
+	stringedWinRate = JSON.stringify(championRate);
+	stringedBanRate = JSON.stringify(banRate);
+	stringedDeathRate = JSON.stringify(deathRate);
+}
+
+
 module.exports = async (msg, args) => {
 	url = `https://champion.gg/champion/${args}`;
 	if (!args.length) return;
-
-	let stringedWinRate = JSON.stringify(championRate);
-	let stringedBanRate = JSON.stringify(banRate);
-
+	await stringifyChampions();
 	await msg.channel.send({
 		embed: {
 			color: 16773120,
 			title: `The stats for ${args}`,
 			fields: [{
 				name: '**Winrate**',
-				value: `**${stringedWinRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} %**`
+				value: `**${stringedWinRate.replace(/[\n\s\t"\\%n\][]/g, '')} %**`
 			},
-			{
-				name: '**BanRate**🤔',
-				value: `${stringedBanRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} % `
-			}
+				{
+					name: '**BanRate**🤔',
+					value: `${stringedBanRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} % `
+				},
+				{
+					name: '**Avarage Deaths per game**',
+					value: `${stringedDeathRate.replace(/[\n\r\s\t"\\%n\][]/g, '')} % `
+				}
 			],
 			timestamp: new Date(),
 			footer: {
@@ -64,9 +78,4 @@ module.exports = async (msg, args) => {
 			}
 		}
 	});
-
-	championRate = await get_data_id();
-	banRate[1] = await get_data_id();
-
-	console.log(banRate);
 };

@@ -11,7 +11,7 @@ client.once('ready', () => {
 });
 
 client.on('message', msg => {
-	if (msg.channel.type == 'dm') {
+	if (msg.channel.type === 'dm') {
 		client.channels.get(MAINCHANNEL_ID).send(msg.content);
 	}
 });
