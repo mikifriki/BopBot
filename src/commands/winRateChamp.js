@@ -32,7 +32,6 @@ async function get_data_id() {
 					.map((i, ele) => $(ele).text())
 					.get()
 			);
-
 			return [championRate, banRate, deathRate];
 		})
 		.catch(function(err) {
@@ -48,13 +47,14 @@ async function stringifyChampions() {
 	stringedWinRate = JSON.stringify(championRate);
 	stringedBanRate = JSON.stringify(banRate);
 	stringedDeathRate = JSON.stringify(deathRate);
+	stringedDeathRate = JSON.stringify(deathRate);
 }
-
 
 module.exports = async (msg, args) => {
 	url = `https://champion.gg/champion/${args}`;
 	if (!args.length) return;
 	await stringifyChampions();
+	if (stringedWinRate === undefined || stringedBanRate === undefined) return;
 	await msg.channel.send({
 		embed: {
 			color: 16773120,
@@ -77,5 +77,7 @@ module.exports = async (msg, args) => {
 				text: 'This whole things fucked'
 			}
 		}
+	}).catch((err) => {
+		console.log(err);
 	});
 };

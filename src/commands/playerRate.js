@@ -48,7 +48,11 @@ module.exports = async (msg, args) => {
 	secondURL = `https://euw.op.gg/summoner/userName=${args}`;
 	if (!args.length) return;
 	await get_player_data();
+
+	if (gameChampion === '[null]') return;
 	await msg.channel.send(
 		`${msg.author} With a win ratio of${gameKDA.slice(11, -2)} the last game ended with a __${gameResult.slice(26, -20)}__ while ${args} played **${gameChampion.slice(2, -2)}**`
 	);
+	
+
 };

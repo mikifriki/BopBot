@@ -1,8 +1,6 @@
 module.exports = async (msg) => {
-
-
+	if (msg.author.bot) return;
 	await msg.channel.send({
-
 		embed: {
 			color: 16773120,
 			title: 'List of commands',
