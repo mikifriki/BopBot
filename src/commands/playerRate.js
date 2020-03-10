@@ -1,58 +1,78 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
 let secondURL = '';
-
-let gameWinInfo = null,
-	gameChampInfo = null,
-	gameKDAInfo = null,
-	gameResult = null,
-	gameChampion = null,
-	gameKDA = null;
+let mainURL = '';
+let gameWinInfo = [],
+	gameChampInfo = [],
+	gameWinRateInfo = [],
+	gameKDAData = [];
 
 async function get_player_data() {
-	return rp(secondURL)
-		.then(function(html) {
-			gameWinInfo = [];
-			gameChampInfo = [];
-			gameKDAInfo = [];
+	try {
+		return rp(secondURL)
 
-			for (let i = 0; i < 1; i++) {
-				gameWinInfo.push(
-					$('.GameResult', html)
-						.map((i, ele) => $(ele).text())
-						.get()[i]
-				);
-				gameChampInfo.push(
-					$('.GameSettingInfo > .ChampionName > a', html)
-						.map((i, ele) => $(ele).text())
-						.get()[i]
-				);
-				gameKDAInfo.push(
-					$('.winratio', html)
-						.map((i, ele) => $(ele).text())
-						.get()[i]
-				);
-			}
-			gameKDA = JSON.stringify(gameKDAInfo);
-			gameResult = JSON.stringify(gameWinInfo);
-			gameChampion = JSON.stringify(gameChampInfo);
+			.then(function(html) {
+				gameWinInfo = [];
+				gameChampInfo = [];
+				gameWinRateInfo = [];
+				for (let i = 0; i < 1; i++) {
+					gameWinInfo.push(
+						$('.GameResult', html)
+							.map((i, ele) => $(ele).text())
+							.get()[i]
+					);
+					gameChampInfo.push(
+						$('.GameSettingInfo > .ChampionName > a', html)
+							.map((i, ele) => $(ele).text())
+							.get()[i]
+					);
+					gameWinRateInfo.push(
+						$('.winratio', html)
+							.map((i, ele) => $(ele).text())
+							.get()[i]
+					);
+				}
+				return {gameWinRateInfo, gameWinInfo, gameChampInfo};
+			});
+	}
+	catch(err) {
+		console.log(err);
+	}
+}
 
-			return [gameResult, gameChampion];
-		})
-		.catch(function(err) {
-			console.log(err);
-		});
+async function get_kda_data() {
+	try {
+		return rp(mainURL)
+			.then(function(html) {
+				for (let i = 0; i < 3; i++) {
+					gameKDAData.push(
+						$('.kda > .num', html)
+							.map((i, ele) => $(ele).text())
+							.get()[i]
+					);
+				}
+				return gameKDAData;
+			});
+	}
+	catch(err) {
+		throw `An error has occured ${err}`;
+	}
 }
 
 module.exports = async (msg, args) => {
 	secondURL = `https://euw.op.gg/summoner/userName=${args}`;
+	mainURL = `https://lolprofile.net/summoner/euw/${args}`;
 	if (!args.length) return;
+	if (gameKDAData === [undefined] || gameChampInfo === []) return;
+
 	await get_player_data();
-
-	if (gameChampion === '[null]') return;
-	await msg.channel.send(
-		`${msg.author} With a win ratio of${gameKDA.slice(11, -2)} the last game ended with a __${gameResult.slice(26, -20)}__ while ${args} played **${gameChampion.slice(2, -2)}**`
-	);
-	
-
+	await get_kda_data();
+	try {
+		await msg.channel.send(
+			`${msg.author} With a win ratio of ${gameWinRateInfo} the last game ended with a __${gameWinInfo.toString().trim()}__ and a KDA of ${gameKDAData[0]}/${gameKDAData[1]}/${gameKDAData[2]} while playing **${gameChampInfo}**`
+		);
+	}
+	catch(err) {
+		console.log(err);
+	}
 };
