@@ -4,10 +4,13 @@ let eightBallAnswers = ['It is certain', 'It is decidedly so', 'Without a doubt'
 	'My sources say no', 'Outlook not so good', 'Very doubtful'];
 
 module.exports = async (msg) => {
-	let ranAnswer = eightBallAnswers[Math.floor(Math.random() * eightBallAnswers.length)];
+	try {
+		let ranAnswer = eightBallAnswers[Math.floor(Math.random() * eightBallAnswers.length)];
 
-	await msg.channel.send(
-		`${msg.author} ${ranAnswer}`
-	);
-
+		await msg.channel.send(
+			`${msg.author} ${ranAnswer}`
+		);
+	} catch (err) {
+		console.log(err);
+	}
 };
