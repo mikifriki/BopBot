@@ -2,11 +2,11 @@ const randomLeague = require('./leagueCommands/randomChamp');
 const stats = require('./leagueCommands/championStats');
 const outcome = require('./leagueCommands/lastGame');
 const rank = require('./leagueCommands/playerRank');
-const eightBall = require('./eightball');
-const time = require('./timeZone');
-const help = require('./help');
-const overWatch = require('./overWatchStats');
-const virus = require('./virusStatistic');
+const eightBall = require('./miscCommands/eightball');
+const time = require('./miscCommands/timeZone');
+const help = require('./miscCommands/help');
+const overWatch = require('./owCommands/overWatchStats');
+const virus = require('./miscCommands/virusStatistic');
 const spamProtection = new Set();
 
 const testChannelID = process.env.TESTCHANNEL_ID;
