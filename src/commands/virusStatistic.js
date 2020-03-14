@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 let url = '';
 let infectionData = [];
 
-async function get_virus_statistic() {
+async function get_virus_statistic () {
 	const html = await axios.get(url);
 	const $ = await cheerio.load(html.data);
 	infectionData = [];

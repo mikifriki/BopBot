@@ -39,7 +39,7 @@ module.exports = async msg => {
 			}
 		}
 
-		setTimeout(function() {
+		setTimeout(function () {
 			spamProtection.delete(msg.author.id);
 		}, 10000);
 	} catch (err) {
