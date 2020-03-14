@@ -1,25 +1,27 @@
-const randomLeague = require('./randomChamp');
+const randomLeague = require('./leagueCommands/randomChamp');
+const stats = require('./leagueCommands/championStats');
+const outcome = require('./leagueCommands/lastGame');
+const rank = require('./leagueCommands/playerRank');
 const eightBall = require('./eightball');
 const time = require('./timeZone');
-const stats = require('./winRateChamp');
 const help = require('./help');
-const status = require('./playerRate');
 const overWatch = require('./overWatchStats');
 const virus = require('./virusStatistic');
 const spamProtection = new Set();
 
-const testChannelID = process.env.CHANNEL_ID;
+const testChannelID = process.env.TESTCHANNEL_ID;
 const botChannelID = process.env.BOTCHANNEL_ID;
 
 const commands = {
 	'8league': randomLeague,
 	'8ball': eightBall,
 	'ow': overWatch,
+	rank,
 	virus,
 	help,
 	time,
 	stats,
-	status
+	outcome
 };
 
 module.exports = async msg => {

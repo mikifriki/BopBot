@@ -1,4 +1,4 @@
-const dataArray = require('./info.json');
+const dataArray = require('../info.json');
 let items = [];
 
 module.exports = async (msg, args) => {

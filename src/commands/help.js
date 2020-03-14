@@ -10,11 +10,17 @@ module.exports = async (msg) => {
 				fields: [
 					{
 						name: 'Test',
-						value: '```8league (Champion) or leave empty for a full build \ntime (Region/City)\nstats (Champion)```'
+						value: '```' +
+							'#8league (Champion) or leave empty for a full build ' +
+							'\n#time (Region/City)\n#stats (Champion)\n#8ball for random awnser' +
+							'\n#ow (playerName) for overwatch stats.\n#virus for Corona virus update' +
+							'\n#Status (Player name) for the outcome of a players last lol match```'
 					},
 					{
 						name: '**Examples**',
-						value: '```\n8league Sona or 8league \ntime Europe/Tallinn\nstats Ahri```'
+						value: '```\n#8league Sona or #8league ' +
+							'\n#time Europe/Tallinn\n#stats Ahri' +
+							'\n#8ball\n#ow EvilG0\n#virus\n#status PussayDestroyer```'
 					}
 				]
 			}
