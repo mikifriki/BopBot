@@ -34,8 +34,8 @@ module.exports = async (msg, args) => {
 	try {
 		url = `https://champion.gg/champion/${args}`;
 		if (!args.length) return;
-		if (championData[0].Winrate === undefined || championData[0].Banrate === undefined) return;
 		await get_data_id();
+
 		await msg.channel.send({
 			embed: {
 				color: 16773120,
@@ -60,7 +60,9 @@ module.exports = async (msg, args) => {
 				}
 			}
 		});
+		if (championData[0] === undefined)
 	} catch (err) {
 		console.log(err);
+		console.clear();
 	}
 };

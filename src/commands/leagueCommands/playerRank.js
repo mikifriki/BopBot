@@ -18,7 +18,6 @@ async function getPlayerRank () {
 							.get()[i]
 					);
 				}
-				console.log('Fetching rank');
 				return soloRank;
 			});
 	} catch (err) {

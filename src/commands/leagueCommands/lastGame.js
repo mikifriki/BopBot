@@ -61,7 +61,6 @@ module.exports = async (msg, args) => {
 	if (gameKDAData === [undefined] || gameInfo === undefined) return;
 	await get_player_data();
 	await get_kda_data();
-	console.log(msg);
 	try {
 		await msg.channel.send(
 			`${msg.author} With a win ratio of ${gameInfo[0].WinRate} the last game ended with a __${gameInfo[0].Win.toString().trim()}__ and a KDA of ${gameKDAData[0]}/${gameKDAData[1]}/${gameKDAData[2]} while playing **${gameInfo[0].ChampInfo}**`
