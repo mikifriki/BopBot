@@ -6,7 +6,7 @@ const eightBall = require('./miscCommands/eightball');
 const time = require('./miscCommands/timeZone');
 const help = require('./miscCommands/help');
 const overWatch = require('./owCommands/overWatchStats');
-const virus = require('./miscCommands/virusStatistic');
+const corona = require('./miscCommands/virusStatistic');
 const spamProtection = new Set();
 
 const testChannelID = process.env.TESTCHANNEL_ID;
@@ -17,7 +17,7 @@ const commands = {
 	'8ball': eightBall,
 	'ow': overWatch,
 	rank,
-	virus,
+	corona,
 	help,
 	time,
 	stats,
@@ -28,14 +28,14 @@ module.exports = async msg => {
 	if (msg.author.bot) return;
 	try {
 		if (msg.channel.id === testChannelID) {
-			if (spamProtection.has(msg.author.id)) {
-				msg.channel.send('You better stop ' + msg.author);
-				return;
-			}
 			const args = msg.content.split(' ');
 			if (args.length === 0 || args[0].charAt(0) !== '#') return;
 			const command = args.shift().substr(1);
 			if (Object.keys(commands).includes(command)) {
+				if (spamProtection.has(msg.author.id)) {
+					msg.channel.send('You better stop ' + msg.author);
+					return;
+				}
 				spamProtection.add(msg.author.id);
 				commands[command](msg, args);
 			}

@@ -4,7 +4,6 @@ require('dotenv').config();
 const commandHandler = require('./commands');
 const client = new Discord.Client();
 const MAINCHANNEL_ID = process.env.MAINCHANNEL_ID;
-const CHANNEL_ID = process.env.CHANNEL_ID;
 
 client.once('ready', () => {
 	console.log('🤖 Beep beep! I am ready!');
