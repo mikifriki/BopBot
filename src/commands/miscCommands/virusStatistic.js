@@ -28,28 +28,28 @@ module.exports = async (msg) => {
 	await get_virus_statistic();
 	try {
 		await msg.channel.send({
-				embed: {
-					color: 16773120,
-					title: 'Fresh stats for yall fave toyota corolla virus. :heart_eyes: ',
-					fields: [
-						{
+			embed: {
+				color: 16773120,
+				title: 'Fresh stats for yall fave toyota corolla virus. :heart_eyes: ',
+				fields: [
+					{
 						name: ':zipper_mouth:**Coronavirus Cases**',
 						value: `**${infectionData[0]}**`
 					},
-						{
-							name: '**:skull_crossbones:Deaths:**',
-							value: `${infectionData[1]}`
-						},
-						{
-							name: '**:mask:**Recovered**',
-							value: `${infectionData[2]}`
-						}],
-					timestamp: new Date(),
-					footer: {
-						text: ':spill: We all finna die'
-					}
+					{
+						name: '**:skull_crossbones:Deaths:**',
+						value: `${infectionData[1]}`
+					},
+					{
+						name: '**:mask:**Recovered**',
+						value: `${infectionData[2]}`
+					}],
+				timestamp: new Date(),
+				footer: {
+					text: ':spill: We all finna die'
 				}
 			}
+		}
 		);
 	} catch (err) {
 		console.log(err);
