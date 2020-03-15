@@ -18,6 +18,7 @@ async function getPlayerRank () {
 							.get()[i]
 					);
 				}
+				console.log('Fetching rank');
 				return soloRank;
 			});
 	} catch (err) {
@@ -29,10 +30,9 @@ module.exports = async (msg, args) => {
 	opGGUrl = `https://euw.op.gg/summoner/userName=${args}`;
 
 	if (!args.length) return;
-	if (soloRank[0] === undefined || soloRank[1] === undefined) return;
+	if (soloRank[0] === [undefined] || soloRank[1] === [undefined]) return;
 
 	await getPlayerRank();
-	console.log(args);
 	try {
 		await msg.channel.send(
 			`${msg.author} ${args} is hardstuck in ${soloRank[0]} with a winrate of ${soloRank[1].toString().trim()}`
