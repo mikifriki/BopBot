@@ -40,10 +40,11 @@ module.exports = async (msg, args) => {
 			embed: {
 				color: 16773120,
 				title: `The stats for ${args}`,
-				fields: [{
-					name: '**Winrate**',
-					value: `**${championData[0].Winrate.toString().trim()}**`
-				},
+				fields: [
+					{
+						name: '**Winrate**',
+						value: `**${championData[0].Winrate.toString().trim()}**`
+					},
 					{
 						name: '**BanRate**🤔',
 						value: `${championData[0].Banrate.toString().trim()}`

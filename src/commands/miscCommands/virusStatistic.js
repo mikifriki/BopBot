@@ -31,7 +31,8 @@ module.exports = async (msg) => {
 				embed: {
 					color: 16773120,
 					title: 'Fresh stats for yall fave toyota corolla virus. :heart_eyes: ',
-					fields: [{
+					fields: [
+						{
 						name: ':zipper_mouth:**Coronavirus Cases**',
 						value: `**${infectionData[0]}**`
 					},
@@ -42,8 +43,7 @@ module.exports = async (msg) => {
 						{
 							name: '**:mask:**Recovered**',
 							value: `${infectionData[2]}`
-						}
-					],
+						}],
 					timestamp: new Date(),
 					footer: {
 						text: ':spill: We all finna die'
