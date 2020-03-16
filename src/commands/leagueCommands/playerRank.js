@@ -18,6 +18,7 @@ async function getPlayerRank () {
 							.get()[i]
 					);
 				}
+				console.log('fetching player rank');
 				return soloRank;
 			});
 	} catch (err) {
@@ -34,7 +35,7 @@ module.exports = async (msg, args) => {
 	await getPlayerRank();
 	try {
 		await msg.channel.send(
-			`${msg.author} ${args} is hardstuck in ${soloRank[0]} with a winrate of ${soloRank[1].toString().trim()}`
+			`${msg.author} ${args} is hardstuck in ${soloRank[0]} with lp of ${soloRank[1].toString().trim()}`
 		);
 	} catch (err) {
 		console.log(err);

@@ -22,7 +22,6 @@ async function get_data_id () {
 							.map((i, ele) => $(ele).text())
 							.get()
 				});
-
 				return { championData };
 			});
 	} catch (err) {
