@@ -12,6 +12,7 @@ const spamProtection = new Set();
 
 const testChannelID = process.env.TESTCHANNEL_ID;
 const botChannelID = process.env.BOTCHANNEL_ID;
+const suggestionsID = process.env.ANNOUCEMENT_ID;
 
 const commands = {
 	'8league': randomLeague,
@@ -29,7 +30,7 @@ const commands = {
 module.exports = async msg => {
 	if (msg.author.bot) return;
 	try {
-		if (msg.channel.id === botChannelID) {
+		if (msg.channel.id === testChannelID || msg.channel.id === suggestionsID) {
 			const args = msg.content.split(' ');
 			if (args.length === 0 || args[0].charAt(0) !== '#') return;
 			const command = args.shift().substr(1);
@@ -38,7 +39,6 @@ module.exports = async msg => {
 				commands[command](msg, args);
 			}
 		}
-
 		setTimeout(function() {
 			spamProtection.delete(msg.author.id);
 		}, 10000);
