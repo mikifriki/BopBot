@@ -30,10 +30,10 @@ const commands = {
 module.exports = async msg => {
 	if (msg.author.bot) return;
 	try {
-		if (msg.channel.id === botChannelID || suggestionsID) {
+		if (msg.channel.id === testChannelID || suggestionsID) {
 			const args = msg.content.split(' ');
-			const command = args.shift().substr(1);
 			if (args.length === 0 || args[0].charAt(0) !== '#') return;
+			const command = args.shift().substr(1);
 			if (Object.keys(commands).includes(command)) {
 				spamProtection.add(msg.author.id);
 				commands[command](msg, args);
