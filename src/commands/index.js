@@ -30,7 +30,7 @@ const commands = {
 module.exports = async msg => {
 	if (msg.author.bot) return;
 	try {
-		if (msg.channel.id === testChannelID || suggestionsID) {
+		if (msg.channel.id === botChannelID || suggestionsID) {
 			const args = msg.content.split(' ');
 			if (args.length === 0 || args[0].charAt(0) !== '#') return;
 			const command = args.shift().substr(1);
