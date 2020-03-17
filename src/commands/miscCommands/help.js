@@ -15,14 +15,16 @@ module.exports = async (msg) => {
 							'\n#time (Region/City)\n#stats (Champion)\n#8ball for random awnser' +
 							'\n#ow (playerName) for overwatch stats.\n#corona for Corona virus update' +
 							'\n#outcome (Player name) for the outcome of a players last lol match' +
-							'\n#rank (Player name) for the current rank and lp of a player```'
+							'\n#rank (Player name) for the current rank and lp of a player' +
+							'\n#suggest (your suggestion) for a any suggestion you want.```'
 					},
 					{
 						name: '**Examples**',
 						value: '```\n#8league Sona or #8league ' +
 							'\n#time Europe/Tallinn\n#stats Ahri' +
 							'\n#8ball\n#ow EvilG0\n#corona\n#status PussayDestroyer' +
-							'\n#rank HayaiDesuChan```'
+							'\n#rank HayaiDesuChan' +
+							'\n#suggest Is this bad?```'
 					}
 				]
 			}

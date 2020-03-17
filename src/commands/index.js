@@ -18,22 +18,22 @@ const commands = {
 	'8league': randomLeague,
 	'8ball': eightBall,
 	'ow': overWatch,
+	'suggest': suggestions,
 	rank,
 	virus,
 	help,
 	time,
 	stats,
-	outcome,
-	'suggest': suggestions
+	outcome
 };
 
 module.exports = async msg => {
 	if (msg.author.bot) return;
 	try {
-		if (msg.channel.id === testChannelID || msg.channel.id === suggestionsID) {
+		if (msg.channel.id === testChannelID || suggestionsID) {
 			const args = msg.content.split(' ');
-			if (args.length === 0 || args[0].charAt(0) !== '#') return;
 			const command = args.shift().substr(1);
+			if (args.length === 0 || args[0].charAt(0) !== '#') return;
 			if (Object.keys(commands).includes(command)) {
 				spamProtection.add(msg.author.id);
 				commands[command](msg, args);
