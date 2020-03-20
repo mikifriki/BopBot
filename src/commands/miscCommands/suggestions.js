@@ -5,7 +5,7 @@ module.exports = async (msg, args) => {
 		await msg.channel.send({
 			'embed': {
 				title: `Suggestion by ${name}`,
-				description: `${args}`,
+				'description': `${args}`,
 				timestamp: Date.now()
 			}
 		}).then(sentEmbed => {

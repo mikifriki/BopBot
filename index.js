@@ -9,6 +9,11 @@ client.once('ready', () => {
 	console.log('🤖 Beep beep! I am ready!');
 });
 
+client.once('disconnect', () => {
+	console.log('🤖 Beep boop! I am gone!');
+});
+
+
 client.on('message', msg => {
 	if (msg.channel.type === 'dm') {
 		client.channels.get(MAINCHANNEL_ID).send(msg.content);
