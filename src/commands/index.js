@@ -1,7 +1,7 @@
 const { Util } = require('discord.js');
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('AIzaSyAki9rSmM28KxJfrKE1R__sngb8jr7IZrA'); //API KEY DO NOT COMMIT!!!!
+const youtube = new YouTube(process.env.YOUTUBE_KEY); //API KEY DO NOT COMMIT!!!!
 
 const randomLeague = require('./leagueCommands/randomChamp');
 const stats = require('./leagueCommands/championStats');
