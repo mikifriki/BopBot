@@ -1,10 +1,10 @@
 const { Util } = require('discord.js');
 const ytdl = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube(process.env.YOUTUBE_KEY); //API KEY DO NOT COMMIT!!!!
+const youtube = new YouTube(process.env.YOUTUBE_KEY);
 const queue = new Map();
-
 module.exports = async msg => {
+	const nothingPlayingMsg = msg.channel.send('There is nothing playing');
 	const serverQueue = queue.get(msg.guild.id);
 	if (msg.content.includes('play')) {
 		const args = msg.content.split(' ');
@@ -26,18 +26,18 @@ module.exports = async msg => {
 			msg.channel.send(`Playlist: ${playlist.title} has been added`);
 			try {
 				for (const video of Object.values(videos)) {
-					const video2 = await youtube.getVideoByID(video.id);
-					await handleVideo(video2, msg, voiceChannel, true);
+					const videoId = await youtube.getVideoByID(video.id);
+					await handleVideo(videoId, msg, voiceChannel, true);
 				}
 			} catch (err) {
-				return console.log(`Theres a private video: ${err}`);
+				return console.log(`There is a private video: ${err}`);
 			}
 		} else {
 			try {
 				var video = await youtube.getVideo(url);
 			} catch (err) {
 				try {
-					var videos = await youtube.searchVideos(searchString, 1);
+					let videos = await youtube.searchVideos(searchString, 1);
 					video = await youtube.getVideoByID(videos[0].id);
 				} catch (err) {
 					console.log(err);
@@ -51,7 +51,7 @@ module.exports = async msg => {
 		trueShuffle(serverQueue.songs);
 		return serverQueue.songs;
 	} else if (msg.content.includes('skip')) {
-		if (!serverQueue) return msg.channel.send('There is nothing playing');
+		if (!serverQueue) return nothingPlayingMsg;
 		serverQueue.connection.dispatcher.end();
 		return undefined;
 	} else if (msg.content.includes('stop')) {
@@ -61,16 +61,16 @@ module.exports = async msg => {
 		serverQueue.connection.dispatcher.end();
 		return msg.channel.send('Stopped music');
 	} else if (msg.content.includes('np')) {
-		if (!serverQueue) return msg.channel.send('There is nothing playing');
+		if (!serverQueue) return nothingPlayingMsg;
 		return msg.channel.send(`Now playing: ${serverQueue.songs[0].title} `);
 	}
 	if (msg.content.includes('queue')) {
-		if (!serverQueue) return msg.channel.send('There is nothing playing');
+		if (!serverQueue) return nothingPlayingMsg;
 		return msg.channel.send(`
 			__**The Queue**__
 ${serverQueue.songs.map(song => `${song.title}`).join('\n')}
-			
-			__**Current song**__${serverQueue.songs[0].title};
+
+__**Current song**__${serverQueue.songs[0].title};
 			`);
 	} else if (msg.content.includes('pause')) {
 		if (serverQueue && serverQueue.playing) {
@@ -78,14 +78,14 @@ ${serverQueue.songs.map(song => `${song.title}`).join('\n')}
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('The song is paused');
 		}
-		return msg.channel.send('There is nothing playing');
+		return nothingPlayingMsg;
 	} else if (msg.content.includes('resume')) {
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
 			return msg.channel.send('The song is resumed');
 		}
-		return msg.channel.send('There is nothing playing');
+		return nothingPlayingMsg;
 	}
 };
 
@@ -140,7 +140,7 @@ function play(guild, song) {
 		queue.delete(guild.id);
 		return;
 	}
-	const dispatcher = serverQueue.connection.playStream(ytdl(song.url, { highWaterMark: 32000 }), { bitrate: 192000 })
+	const dispatcher = serverQueue.connection.playStream(ytdl(song.url, { highWaterMark: 16000 }), { bitrate: 192000 })
 		.on('end', () => {
 			serverQueue.songs.shift();
 			play(guild, serverQueue.songs[0]);
