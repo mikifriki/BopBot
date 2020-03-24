@@ -14,6 +14,10 @@ This bot needs node and npm installed in order for it to function.
 
 If You want the music commands to function you must have ffmpeg installed properly on your system.
 
+## Commands
+
+Use !help to get a list of commands that you can use.
+
 ## Built With
 
 * [Node.js](https://nodejs.org/en/) - Used as the bot base environment.
