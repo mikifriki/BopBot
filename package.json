@@ -1,9 +1,15 @@
 {
   "name": "bop-bot",
+  "description": "This is a Discord bot that does alot of different things including playing music.",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/",
     "start": "node index.js"
+  },
+  "author": {
+    "name": "Mikifriki",
+    "url": "https://github.com/mikifriki"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
