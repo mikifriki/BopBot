@@ -1,8 +1,3 @@
-const { Util } = require('discord.js');
-const ytdl = require('ytdl-core');
-const YouTube = require('simple-youtube-api');
-const youtube = new YouTube(process.env.YOUTUBE_KEY); //API KEY DO NOT COMMIT!!!!
-
 const randomLeague = require('./leagueCommands/randomChamp');
 const stats = require('./leagueCommands/championStats');
 const outcome = require('./leagueCommands/lastGame');
@@ -16,6 +11,7 @@ const suggestions = require('./miscCommands/suggestions');
 const bop = require('./musicCommands/music');
 const spamProtection = new Set();
 
+// eslint-disable-next-line no-unused-vars
 const testChannelID = process.env.TESTCHANNEL_ID;
 const botChannelID = process.env.BOTCHANNEL_ID;
 const suggestionsID = process.env.ANNOUCEMENT_ID;
