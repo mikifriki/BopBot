@@ -4,7 +4,6 @@ const YouTube = require('simple-youtube-api');
 const youtube = new YouTube(process.env.YOUTUBE_KEY);
 const queue = new Map();
 module.exports = async msg => {
-	const nothingPlayingMsg = msg.channel.send('There is nothing playing');
 	const serverQueue = queue.get(msg.guild.id);
 	if (msg.content.includes('play')) {
 		const args = msg.content.split(' ');
@@ -51,7 +50,7 @@ module.exports = async msg => {
 		trueShuffle(serverQueue.songs);
 		return serverQueue.songs;
 	} else if (msg.content.includes('skip')) {
-		if (!serverQueue) return nothingPlayingMsg;
+		if (!serverQueue) return msg.channel.send('There is nothing playing');
 		serverQueue.connection.dispatcher.end();
 		return undefined;
 	} else if (msg.content.includes('stop')) {
@@ -61,11 +60,11 @@ module.exports = async msg => {
 		serverQueue.connection.dispatcher.end();
 		return msg.channel.send('Stopped music');
 	} else if (msg.content.includes('np')) {
-		if (!serverQueue) return nothingPlayingMsg;
+		if (!serverQueue) return msg.channel.send('There is nothing playing');
 		return msg.channel.send(`Now playing: ${serverQueue.songs[0].title} `);
 	}
 	if (msg.content.includes('queue')) {
-		if (!serverQueue) return nothingPlayingMsg;
+		if (!serverQueue) return msg.channel.send('There is nothing playing');
 		return msg.channel.send(`
 			__**The Queue**__
 ${serverQueue.songs.map(song => `${song.title}`).join('\n')}
@@ -78,14 +77,14 @@ __**Current song**__${serverQueue.songs[0].title};
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('The song is paused');
 		}
-		return nothingPlayingMsg;
+		return msg.channel.send('There is nothing playing');
 	} else if (msg.content.includes('resume')) {
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
 			serverQueue.connection.dispatcher.resume();
 			return msg.channel.send('The song is resumed');
 		}
-		return nothingPlayingMsg;
+		return msg.channel.send('There is nothing playing');
 	}
 };
 
