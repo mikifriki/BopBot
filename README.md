@@ -6,7 +6,18 @@ Also has a few extras that I wanted from other bots but they didn't have any.
 ## Getting Started
 
 To run the bot just clone the bot repo and run npm install. After that just change the example API keys of Youtube and BotToken.
-Also make sure to change the channel id-s to ones on your server.
+<br/>Also make sure to change the channel id-s to ones on your server.
+
+__Example .env below__ 
+```
+BOT_TOKEN=NjgyOTE1MjEyODE0NTgxNzkx.XmIApw.6-YIblyNID5W2BSLMmQ-2GZ3G4g 
+YOUTUBE_KEY=AIzaSyAki9rSmM28KxJfrKE1R__sngb8jr7IZrA
+GUILD_ID = 326463549234872321
+MAINCHANNEL_ID=447855854809776134
+BOTCHANNEL_ID=446320292642684929
+TESTCHANNEL_ID=638001434956136449
+ANNOUCEMENT_ID=547529711589261365
+```
 
 ### Prerequisites
 
