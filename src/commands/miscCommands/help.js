@@ -13,7 +13,7 @@ module.exports = async (msg) => {
 						value: '```' +
 							'!8league (Champion) or leave empty for a full build ' +
 							'\n!time (Region/City)\n!stats (Champion)\n!8ball for random awnser' +
-							'\n!ow (playerName) for overwatch stats.\n!corona for Corona virus update' +
+							'\n!ow (playerName) for overwatch stats.\n!virus for Corona virus update' +
 							'\n!outcome (Player name) for the outcome of a players last lol match' +
 							'\n!rank (Player name) for the current rank and lp of a player' +
 							'\n!suggest (your suggestion) for a any suggestion you want.```'
