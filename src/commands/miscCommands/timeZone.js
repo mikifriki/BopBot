@@ -1,5 +1,4 @@
 const moment = require('moment-timezone');
-let test = '';
 
 function isValidTimeZone(tz) {
 	if (!Intl || !Intl.DateTimeFormat()) {
@@ -15,17 +14,18 @@ function isValidTimeZone(tz) {
 }
 
 module.exports = async (msg, args) => {
+	let locationTime;
 	if (!args.length) return;
-	test = moment()
+	locationTime = moment()
 		.tz(`${args}`)
 		.format('HH:mm');
 
-	console.log(test);
+	console.log(locationTime);
 	if (isValidTimeZone(args) === false) {
 		await msg.channel.send(
 			`${msg.author} This aint it sis (Not crrently supported)`
 		);
 	} else {
-		await msg.channel.send(`${msg.author} ${test}`);
+		await msg.channel.send(`${msg.author} ${locationTime}`);
 	}
 };

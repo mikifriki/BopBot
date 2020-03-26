@@ -1,13 +1,11 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
-let url = '';
 let championData = [];
 
-async function get_data_id () {
+async function get_data_id(url) {
 	try {
 		return rp(url)
-			.then(function (html) {
-				championData = [];
+			.then(function(html) {
 				championData.push({
 					Winrate:
 						$('#statistics-win-rate-row > td:nth-child(2)', html)
@@ -22,7 +20,7 @@ async function get_data_id () {
 							.map((i, ele) => $(ele).text())
 							.get()
 				});
-				return { championData };
+				return championData;
 			});
 	} catch (err) {
 		console.log(err);
@@ -31,10 +29,9 @@ async function get_data_id () {
 
 module.exports = async (msg, args) => {
 	try {
-		url = `https://champion.gg/champion/${args}`;
+		let url = `https://champion.gg/champion/${args}`;
 		if (!args.length) return;
-		await get_data_id();
-
+		await get_data_id(url);
 		await msg.channel.send({
 			embed: {
 				color: 16773120,
@@ -59,8 +56,8 @@ module.exports = async (msg, args) => {
 				}
 			}
 		});
-		if (championData[0] === undefined);
-	} catch (err) {
+		if (championData[0] === undefined)
+			} catch (err) {
 		console.log(err);
 		console.clear();
 	}

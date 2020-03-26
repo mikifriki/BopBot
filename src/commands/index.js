@@ -47,8 +47,6 @@ module.exports = async msg => {
 			}, 2000);
 		}
 	} catch (err) {
-		{
-			console.log(err);
-		}
+		console.log(err);
 	}
 };

@@ -1,14 +1,13 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
-let opURL = '';
-let lolProfileURL = '';
+
 let gameInfo = [],
 	gameKDAData = [];
 
-async function get_player_data () {
+async function get_player_data(opURL) {
 	try {
 		return rp(opURL)
-			.then(function (html) {
+			.then(function(html) {
 				gameInfo = [];
 
 				for (let i = 0; i < 1; i++) {
@@ -34,10 +33,10 @@ async function get_player_data () {
 	}
 }
 
-async function get_kda_data () {
+async function get_kda_data(lolProfileURL) {
 	try {
 		return rp(lolProfileURL)
-			.then(function (html) {
+			.then(function(html) {
 				gameKDAData = [];
 				for (let i = 0; i < 3; i++) {
 					gameKDAData.push(
@@ -54,13 +53,13 @@ async function get_kda_data () {
 }
 
 module.exports = async (msg, args) => {
-	opURL = `https://euw.op.gg/summoner/userName=${args}`;
-	lolProfileURL = `https://lolprofile.net/summoner/euw/${args}`;
+	let opURL = `https://euw.op.gg/summoner/userName=${args}`;
+	let lolProfileURL = `https://lolprofile.net/summoner/euw/${args}`;
 
 	if (!args.length) return;
 	if (gameKDAData === [undefined] || gameInfo === undefined) return;
-	await get_player_data();
-	await get_kda_data();
+	await get_player_data(opURL);
+	await get_kda_data(lolProfileURL);
 	try {
 		await msg.channel.send(
 			`${msg.author} With a win ratio of ${gameInfo[0].WinRate} the last game ended with a __${gameInfo[0].Win.toString().trim()}__ and a KDA of ${gameKDAData[0]}/${gameKDAData[1]}/${gameKDAData[2]} while playing **${gameInfo[0].ChampInfo}**`
