@@ -56,7 +56,7 @@ module.exports = async (msg, args) => {
 				}
 			}
 		});
-		if (championData[0] === undefined)
+		if (championData[0] === undefined) return;
 	} catch (err) {
 		console.log(err);
 		console.clear();
