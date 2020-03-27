@@ -9,6 +9,7 @@ const overWatch = require('./owCommands/overWatchStats');
 const virus = require('./miscCommands/virusStatistic');
 const suggestions = require('./miscCommands/suggestions');
 const bop = require('./musicCommands/music');
+const apex = require('./apexCommands/apexStats');
 const spamProtection = new Set();
 
 // eslint-disable-next-line no-unused-vars
@@ -21,6 +22,7 @@ const commands = {
 	'8ball': eightBall,
 	'ow': overWatch,
 	'suggest': suggestions,
+	apex,
 	rank,
 	virus,
 	help,
