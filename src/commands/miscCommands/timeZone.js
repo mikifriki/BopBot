@@ -20,10 +20,9 @@ module.exports = async (msg, args) => {
 		.tz(`${args}`)
 		.format('HH:mm');
 
-	console.log(locationTime);
 	if (isValidTimeZone(args) === false) {
 		await msg.channel.send(
-			`${msg.author} This aint it sis (Not crrently supported)`
+			`${msg.author} This aint it sis (Not crrently supported timezone)`
 		);
 	} else {
 		await msg.channel.send(`${msg.author} ${locationTime}`);

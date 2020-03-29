@@ -1,7 +1,6 @@
 module.exports = async (msg) => {
 	try {
 		if (msg.author.bot) return;
-		console.log('called');
 		await msg.channel.send({
 			embed: {
 				color: 16773120,
