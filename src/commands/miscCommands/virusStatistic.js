@@ -8,7 +8,6 @@ async function get_virus_statistic(url) {
 			return infectionData = response.data;
 		}))
 		.catch(function(error) {
-			console.log();
 			if (error.response.status === 404) return;
 		});
 }
