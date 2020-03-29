@@ -11,10 +11,11 @@ async function get_ow_data(url) {
 }
 
 module.exports = async (msg, args) => {
-	let url = `https://public-api.tracker.gg/v2/apex/standard/profile/origin/${args}`
+	let url = `https://public-api.tracker.gg/v2/apex/standard/profile/origin/${args}`;
 	await get_ow_data(url);
 	const generalData = apexInfo.data.segments[0].stats;
 	const rank = apexInfo.data.segments[0].stats.rankScore;
+	if (!args.length) return;
 	try {
 		if (url === 'https://public-api.tracker.gg/v2/apex/standard/profile/origin/0sugoidesune') {
 			await msg.channel.send(

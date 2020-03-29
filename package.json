@@ -12,14 +12,15 @@
     "url": "https://github.com/mikifriki"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "moment-timezone": "^0.5.28",
+    "opusscript": "0.0.7",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "axios": "^0.19.2",
-    "opusscript": "0.0.7",
     "simple-youtube-api": "^5.2.1",
     "ytdl-core": "^2.0.1"
   },
