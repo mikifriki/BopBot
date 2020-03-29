@@ -22,19 +22,17 @@ let embeded = infectionData => new Discord.RichEmbed()
 	.setFooter(':spill: We all finna die');
 
 module.exports = async (msg, args) => {
-	let url;
-	infectionData = undefined;
-	if (!args.length) {
-		url = 'https://corona.lmao.ninja/all';
-	} else {
-		url = `https://corona.lmao.ninja/countries/${args}`;
-	}
-	await get_virus_statistic(url);
-	if (infectionData === undefined) {
-		return msg.channel.send('You have entered an incorrect country.');
-	} else {
-		await msg.channel.send({
-			embed: embeded(infectionData)
-		});
+	try {
+		let url;
+		infectionData = undefined;
+		if (!args.length) {
+			url = 'https://corona.lmao.ninja/all';
+		} else {
+			url = `https://corona.lmao.ninja/countries/${args}`;
+		}
+		await get_virus_statistic(url);
+		await msg.channel.send({ embed: embeded(infectionData) });
+	} catch (err) {
+		console.log(err);
 	}
 };
