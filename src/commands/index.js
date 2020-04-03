@@ -10,6 +10,7 @@ const virus = require('./miscCommands/virusStatistic');
 const suggestions = require('./miscCommands/suggestions');
 const bop = require('./musicCommands/music');
 const apex = require('./apexCommands/apexStats');
+const define = require('./miscCommands/defineCommand');
 const spamProtection = new Set();
 
 // eslint-disable-next-line no-unused-vars
@@ -29,14 +30,15 @@ const commands = {
 	time,
 	stats,
 	outcome,
-	bop
+	bop,
+	define
 };
 
 module.exports = async msg => {
 	if (msg.author.bot) return;
 	if (spamProtection.has(msg.author.id)) return msg.channel.send('Gurl stop spamming');
 	try {
-		if (msg.channel.id === testChannelID || suggestionsID) {
+		if (msg.channel.id === botChannelID || suggestionsID) {
 			const args = msg.content.split(' ');
 			if (args.length === 0 || args[0].charAt(0) !== '!') return;
 			const command = args.shift().substr(1);

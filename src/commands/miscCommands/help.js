@@ -15,7 +15,8 @@ module.exports = async (msg) => {
 							'\n!ow (playerName) for overwatch stats.\n!virus for Corona virus update' +
 							'\n!outcome (Player name) for the outcome of a players last lol match' +
 							'\n!rank (Player name) for the current rank and lp of a player' +
-							'\n!suggest (your suggestion) for a any suggestion you want.```'
+							'\n!suggest (your suggestion) for a any suggestion you want.' +
+							'\n!define (word) for a definition of your desired word.```'
 					},
 					{
 						name: '**Music Bot Commands**',
