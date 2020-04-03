@@ -7,7 +7,7 @@ async function get_virus_statistic(url) {
 		.then((response => {
 			return infectionData = response.data;
 		}))
-		.catch(function(error) {
+		.catch((error) => {
 			if (error.response.status === 404) return;
 		});
 }
@@ -22,17 +22,16 @@ let embeded = infectionData => new Discord.RichEmbed()
 	.setFooter(':spill: We all finna die');
 
 module.exports = async (msg, args) => {
-	try {
-		let url;
-		infectionData = undefined;
-		if (!args.length) {
-			url = 'https://corona.lmao.ninja/all';
-		} else {
-			url = `https://corona.lmao.ninja/countries/${args}`;
-		}
-		await get_virus_statistic(url);
-		await msg.channel.send({ embed: embeded(infectionData) });
-	} catch (err) {
-		console.log(err);
+	let url;
+	infectionData = undefined;
+	if (!args.length) {
+		url = 'https://corona.lmao.ninja/all';
+	} else {
+		url = `https://corona.lmao.ninja/countries/${args}`;
 	}
+	await get_virus_statistic(url)
+		.then(() => {
+			msg.channel.send({ embed: embeded(infectionData) });
+		})
+		.catch(console.log);
 };
