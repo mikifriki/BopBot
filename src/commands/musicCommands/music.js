@@ -113,8 +113,8 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 				volume: 5,
 				playing: true
 			};
-			queue.set(msg.guild.id, queueConstruct); // sets values to the queueConstruct from guild
-			queueConstruct.songs.push(song); // gives access to songs array;
+			queue.set(msg.guild.id, queueConstruct);
+			queueConstruct.songs.push(song);
 			try {
 				queueConstruct.connection = await voiceChannel.join();
 				play(msg.guild, queueConstruct.songs[0]);

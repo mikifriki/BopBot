@@ -1,6 +1,5 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
-
 let soloRank = [];
 
 async function getPlayerRank(opGGUrl) {
@@ -18,7 +17,6 @@ async function getPlayerRank(opGGUrl) {
 							.get()[i]
 					);
 				}
-				console.log('fetching player rank');
 				return soloRank;
 			});
 	} catch (err) {
@@ -28,10 +26,8 @@ async function getPlayerRank(opGGUrl) {
 
 module.exports = async (msg, args) => {
 	let opGGUrl = `https://euw.op.gg/summoner/userName=${args}`;
-
 	if (!args.length) return;
 	if (soloRank[0] === [undefined] || soloRank[1] === [undefined]) return;
-
 	await getPlayerRank(opGGUrl);
 	try {
 		await msg.channel.send(
