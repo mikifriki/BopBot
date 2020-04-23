@@ -1,6 +1,5 @@
 module.exports = async (msg, args) => {
 	if (msg.author.bot) return;
-
 	let name = msg.author.username;
 	await msg.channel.send({
 		'embed': {

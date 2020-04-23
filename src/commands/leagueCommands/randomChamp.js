@@ -43,6 +43,5 @@ module.exports = async (msg, args) => {
 		}
 	} catch (err) {
 		console.log(err);
-
 	}
 };
