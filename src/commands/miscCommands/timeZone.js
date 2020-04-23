@@ -4,7 +4,6 @@ function isValidTimeZone(tz) {
 	if (!Intl || !Intl.DateTimeFormat()) {
 		throw 'Time zones are not available in this environment';
 	}
-
 	try {
 		Intl.DateTimeFormat(undefined, { timeZone: tz });
 		return true;
