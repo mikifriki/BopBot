@@ -32,6 +32,6 @@ Use !help to get a list of commands that you can use.
 ## Built With
 
 * [Node.js](https://nodejs.org/en/) - Used as the bot base environment.
-* [Discord.js](https://discord.js.org/) - Node module used to communicate with the Discrod API.
+* [Discord.js](https://discord.js.org/) - Node module used to communicate with the Discord API.
 * [FFmpeg](https://www.ffmpeg.org/) - Used for streaming audio.
 * And some other minor dependencies.
