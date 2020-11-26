@@ -39,7 +39,7 @@ module.exports = async msg => {
 	if (spamProtection.has(msg.author.id)) return msg.channel.send('Gurl stop spamming');
 	try {
 			const args = msg.content.split(' ');
-			if (args.length === 0 || args[0].charAt(0) !== '!') return;
+			if (args.length === 0 || args[0].charAt(0) !== '&') return;
 			const command = args.shift().substr(1);
 			if (Object.keys(commands).includes(command)) {
 				spamProtection.add(msg.author.id);
