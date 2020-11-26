@@ -38,7 +38,6 @@ module.exports = async msg => {
 	if (msg.author.bot) return;
 	if (spamProtection.has(msg.author.id)) return msg.channel.send('Gurl stop spamming');
 	try {
-		if (msg.channel.id === botChannelID || suggestionsID) {
 			const args = msg.content.split(' ');
 			if (args.length === 0 || args[0].charAt(0) !== '!') return;
 			const command = args.shift().substr(1);
@@ -49,7 +48,7 @@ module.exports = async msg => {
 			setTimeout(function() {
 				spamProtection.delete(msg.author.id);
 			}, 2000);
-		}
+		
 	} catch (err) {
 		console.log(err);
 	}

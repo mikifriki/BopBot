@@ -14,11 +14,11 @@ client.once('disconnect', () => {
 });
 
 
-client.on('message', msg => {
+/* client.on('message', msg => {
 	if (msg.channel.type === 'dm') {
 		client.channels.get(MAINCHANNEL_ID).send(msg.content);
 	}
-});
+}); */
 
 client.on('message', commandHandler);
 
