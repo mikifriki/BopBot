@@ -26,7 +26,6 @@ async function getDataId(url) {
 module.exports = async (msg, args) => {
 	let url = `https://champion.gg/champion/${args}`;
 	if (!args.length) return;
-	if (championData[0] === undefined) return;
 	await getDataId(url)
 		.then(() => {
 			msg.channel.send({
@@ -54,4 +53,5 @@ module.exports = async (msg, args) => {
 				}
 			});
 		}).catch(console.log);
+		if (championData[0] === undefined) return;
 };

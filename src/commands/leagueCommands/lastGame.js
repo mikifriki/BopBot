@@ -35,6 +35,8 @@ async function getPlayerData(opURL, lolProfileURL) {
 						.map((i, ele) => $(ele).text())
 						.get()[i]
 				);
+				
+		
 			}
 			return gameKDAData;
 		});
@@ -46,12 +48,12 @@ module.exports = async (msg, args) => {
 	let lolProfileURL = `https://lolprofile.net/summoner/euw/${args}`;
 
 	if (!args.length) return;
-	if (gameKDAData === [undefined] || gameInfo === undefined) return;
 	await getPlayerData(opURL, lolProfileURL)
 		.then(() => {
 			msg.channel.send(
 				`${msg.author} With a win ratio of ${gameInfo[0].WinRate} the last game ended with a __${gameInfo[0].Win.toString().trim()}__ and a KDA of ${gameKDAData[0]}/${gameKDAData[1]}/${gameKDAData[2]} while playing **${gameInfo[0].ChampInfo}**`
 			);
 		}).catch(console.log);
+		if (gameKDAData === [undefined] || gameInfo === undefined) return;
 };
 
